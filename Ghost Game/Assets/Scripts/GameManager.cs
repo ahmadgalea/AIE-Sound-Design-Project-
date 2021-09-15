@@ -11,8 +11,10 @@ public enum GameState
     Lost
 }
 
-public class NewBehaviourScript : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
+    public RoomLight testLight;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,9 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKey("e"))
+        {
+            testLight.TurnOn();
+        }
     }
 }

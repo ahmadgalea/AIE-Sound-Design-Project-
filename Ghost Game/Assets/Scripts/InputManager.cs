@@ -2,19 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState
+public class InputManager : MonoBehaviour
 {
-    Menu,
-    Paused,
-    Playing,
-    Won,
-    Lost
-}
-
-public class GameManager : MonoBehaviour
-{
-    public RoomLight testLight;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +13,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            EventManager.TurnOnLight(Room.Dining);
+        }
     }
 }

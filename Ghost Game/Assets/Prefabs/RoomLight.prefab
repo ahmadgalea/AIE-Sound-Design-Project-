@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03cb36f2b84ed194d94bf4870edd886c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  room: 1
   lightDuration: 5
+  flashingDuration: 1
+  flashPeriod: 0.2
 --- !u!108 &3397675127419480966
 Light:
   m_ObjectHideFlags: 0

@@ -2,8 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Room
+{
+    Hallway,
+    Kitchen,
+    Dining,
+    Bathroom
+}
 public class RoomLight : MonoBehaviour
 {
+    public Room room;
     public float lightDuration = 10.0f;
     public float flashingDuration = 1.0f;
     public float flashPeriod = 0.2f;

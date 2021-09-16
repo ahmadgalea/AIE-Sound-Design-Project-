@@ -2,9 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ObjectType
+{
+    Metalic,
+    Glass,
+    Water
+}
+
 public class HauntedObject : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public ObjectType type;
+    public Room room;
+
     void Start()
     {
         

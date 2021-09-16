@@ -13,6 +13,7 @@ public class HauntedObject : MonoBehaviour
 {
     public ObjectType type;
     public Room room;
+    public Ghost ghost;
 
     public float possessionTimeLimit = 5.0f;
 
@@ -28,6 +29,11 @@ public class HauntedObject : MonoBehaviour
         EventManager.OnPossessionStop += OnPossessionStop;
         EventManager.OnPossessionComplete += OnPossessionComplete;
         audio = GetComponent<AudioSource>();
+
+        if(ghost)
+        {
+            ghost.AddObject(this);
+        }
     }
 
     // Update is called once per frame
@@ -47,6 +53,7 @@ public class HauntedObject : MonoBehaviour
         isPossessed = false;
         ghostPossessing = true;
         possessionTimer = 0.0f;
+        audio.Play();
     }
 
     private void OnPossessionStop(Room room, ObjectType type)
@@ -54,6 +61,7 @@ public class HauntedObject : MonoBehaviour
         isPossessed = false;
         ghostPossessing = false;
         possessionTimer = 0.0f;
+        audio.Stop();
     }
 
     private void OnPossessionComplete(Room room, ObjectType type)
@@ -63,6 +71,13 @@ public class HauntedObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        EventManager.StopPossession(room, type);
+        if (other.tag == "Player")
+        {
+            EventManager.StopPossession(room, type);
+        }
+        else if(other.tag == "Ghost")
+        {
+            EventManager.StartPossession(room,type);
+        }
     }
 }

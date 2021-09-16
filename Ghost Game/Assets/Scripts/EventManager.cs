@@ -42,7 +42,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public static void PossessionSound(Room room,ObjectType type)
+    public static void StartPossession(Room room,ObjectType type)
     {
         if (EventManager.OnPossessionStart != null)
         {

@@ -54,7 +54,7 @@ public class RoomLight : MonoBehaviour
             }
             if(timer >= lightDuration)
             {
-                TurnOff();
+                EventManager.TurnOffLight(room);
             }
         }
     }

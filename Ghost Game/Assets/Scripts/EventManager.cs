@@ -13,6 +13,8 @@ public class EventManager : MonoBehaviour
 
     public static event PossessionAction OnPossessionStart;
     public static event PossessionAction OnPossessionStop;
+    public static event PossessionAction OnPossessionPause;
+    public static event PossessionAction OnPossessionContinue;
     public static event PossessionAction OnPossessionComplete;
 
     // rooms: 0-kitchen, 1-dining, 2-bathroom
@@ -55,6 +57,22 @@ public class EventManager : MonoBehaviour
         if (EventManager.OnPossessionStop != null)
         {
             EventManager.OnPossessionStop(room,type);
+        }
+    }
+
+    public static void PausePossession(Room room, ObjectType type)
+    {
+        if (EventManager.OnPossessionPause != null)
+        {
+            EventManager.OnPossessionPause(room, type);
+        }
+    }
+
+    public static void ContinuePossession(Room room, ObjectType type)
+    {
+        if (EventManager.OnPossessionContinue != null)
+        {
+            EventManager.OnPossessionContinue(room, type);
         }
     }
 

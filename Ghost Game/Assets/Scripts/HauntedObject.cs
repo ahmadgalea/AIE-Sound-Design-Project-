@@ -13,6 +13,7 @@ public class HauntedObject : MonoBehaviour
 {
     public ObjectType type;
     public Room room;
+    public Ghost ghost;
 
     public float possessionTimeLimit = 5.0f;
 

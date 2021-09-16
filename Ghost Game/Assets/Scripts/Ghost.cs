@@ -30,13 +30,16 @@ public class Ghost : MonoBehaviour
     {
         EventManager.OnPossessionStart += OnPossessionStart;
         EventManager.OnPossessionStop += OnPossessionStop;
-        objects = new List<HauntedObject>();
 
         audio = GetComponent<AudioSource>();
     }
 
     public void AddObject(HauntedObject hauntedObject)
     {
+        if(objects == null)
+        {
+            objects = new List<HauntedObject>();
+        }
         objects.Add(hauntedObject);
     }
 

@@ -24,6 +24,9 @@ public class RoomLight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EventManager.OnLightOn += OnTurnOn;
+        EventManager.OnLightOff += OnTurnOff;
+
         light = GetComponent<Light>();
         Reset();
     }
@@ -90,6 +93,22 @@ public class RoomLight : MonoBehaviour
     public bool IsOn()
     {
         return isOn;
+    }
+
+    private void OnTurnOn(Room eventRoom)
+    {
+        if(room == eventRoom)
+        {
+            TurnOn();
+        }
+    }
+
+    private void OnTurnOff(Room eventRoom)
+    {
+        if (room == eventRoom)
+        {
+            TurnOff();
+        }
     }
 
 }

@@ -10,12 +10,19 @@ public class InputManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             EventManager.TurnOnLight(Room.Dining);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            EventManager.TurnOnLight(Room.Kitchen);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            EventManager.TurnOnLight(Room.Bathroom);
         }
     }
 }

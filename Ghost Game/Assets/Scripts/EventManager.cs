@@ -9,6 +9,16 @@ public class EventManager : MonoBehaviour
     public static event LightAction OnLightOn;
     public static event LightAction OnLightOff;
 
+    // rooms: 0-kitchen, 1-dining, 2-bathroom
+    public static void TurnOnLight(int room)
+    {
+        EventManager.TurnOnLight((Room)room);
+    }
+
+    public static void TurnOffLight(int room)
+    {
+        EventManager.TurnOffLight((Room)room);
+    }
 
     public static void TurnOnLight(Room room)
     {

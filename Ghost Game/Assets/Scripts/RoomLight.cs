@@ -4,10 +4,10 @@ using UnityEngine;
 
 public enum Room
 {
-    Hallway,
     Kitchen,
     Dining,
-    Bathroom
+    Bathroom,
+    Hallway
 }
 public class RoomLight : MonoBehaviour
 {

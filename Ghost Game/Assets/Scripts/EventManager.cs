@@ -17,6 +17,16 @@ public class EventManager : MonoBehaviour
     public static event PossessionAction OnPossessionContinue;
     public static event PossessionAction OnPossessionComplete;
 
+    public delegate void ObjectInteraction(HauntedObject thisObject);
+
+    public static event ObjectInteraction OnHighlightObject;
+
+    public delegate void AnonObjectInteraction();
+    public static event AnonObjectInteraction OnDehighlightObject;
+
+    public delegate void GunAction();
+    public static event GunAction OnShoot;
+
     // rooms: 0-kitchen, 1-dining, 2-bathroom
     public static void TurnOnLight(int room)
     {
@@ -81,6 +91,30 @@ public class EventManager : MonoBehaviour
         if (EventManager.OnPossessionComplete != null)
         {
             EventManager.OnPossessionComplete(room, type);
+        }
+    }
+
+    public static void HighlightObject(HauntedObject thisObject)
+    {
+        if (EventManager.OnHighlightObject != null)
+        {
+            EventManager.OnHighlightObject(thisObject);
+        }
+    }
+
+    public static void DehighlightObject()
+    {
+        if (EventManager.OnDehighlightObject != null)
+        {
+            EventManager.OnDehighlightObject();
+        }
+    }
+
+    public static void Shoot()
+    {
+        if(EventManager.OnShoot != null)
+        {
+            EventManager.OnShoot();
         }
     }
 

@@ -7,24 +7,23 @@ public class Player : MonoBehaviour
     private HauntedObject highlightedObject = null;
     void Start()
     {
-        EventManager.OnHighlightObject += OnHighlightObject;
-        EventManager.OnDehighlightObject += OnDehighlightObject;
         EventManager.OnShoot += OnShoot;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnHighlightObject(HauntedObject thisObject)
-    {
-        highlightedObject = thisObject;
-    }
-
-    private void OnDehighlightObject()
-    {
+        RaycastHit hitObject;
+        Physics.Raycast(transform.position, transform.forward,out hitObject,2);
+        if (Physics.Raycast(transform.position, transform.forward, out hitObject, 2))
+        {
+            HauntedObject hauntedObject = hitObject.transform.gameObject.GetComponentInParent<HauntedObject>();
+            if (hauntedObject && hauntedObject != highlightedObject)
+            {
+                highlightedObject = hauntedObject;
+                return;
+            }
+        }
         highlightedObject = null;
     }
 

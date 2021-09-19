@@ -28,20 +28,5 @@ public class InputManager : MonoBehaviour
         {
             EventManager.Shoot();
         }
-
-        Ray cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitObject;
-        if (Physics.Raycast(cursorRay, out hitObject,2))
-        {
-            HauntedObject hauntedObject = hitObject.transform.gameObject.GetComponentInParent<HauntedObject>();
-            if (hauntedObject)
-            {
-                EventManager.HighlightObject(hauntedObject);
-            }
-        }
-        else
-        {
-            EventManager.DehighlightObject();
-        }
     }
 }

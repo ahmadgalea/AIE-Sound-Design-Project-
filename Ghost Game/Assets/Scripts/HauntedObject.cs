@@ -97,7 +97,7 @@ public class HauntedObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Ghost")
+        if(other.tag == "Ghost" && state == ObjectState.Normal)
         {
             EventManager.StartPossession(room,type);
         }

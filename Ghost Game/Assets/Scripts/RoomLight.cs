@@ -16,6 +16,9 @@ public class RoomLight : MonoBehaviour
     public float flashingDuration = 1.0f;
     public float flashPeriod = 0.2f;
 
+    public AudioSource tickTockSlow = null;
+    public AudioSource tickTockFast = null;
+
     private bool isOn = false;
     private float timer = 0.0f;
     private float flashTimer = 0.0f;
@@ -50,11 +53,22 @@ public class RoomLight : MonoBehaviour
             timer += Time.deltaTime;
             if(timer >= (lightDuration-flashingDuration))
             {
+                if(tickTockSlow.isPlaying)
+                {
+                    if (tickTockSlow)
+                    {
+                        tickTockSlow.Stop();
+                    }
+                    if (tickTockFast)
+                    {
+                        tickTockFast.Play();
+                    }
+                }
                 FlashUpdate();
             }
             if(timer >= lightDuration)
             {
-                TurnOff();
+                EventManager.TurnOffLight(room);
             }
         }
     }
@@ -79,6 +93,10 @@ public class RoomLight : MonoBehaviour
         {
             light.enabled = true;
         }
+        if(tickTockSlow)
+        {
+            tickTockSlow.Play();
+        }
     }
 
     public void TurnOff()
@@ -87,6 +105,14 @@ public class RoomLight : MonoBehaviour
         if (light)
         {
             light.enabled = false;
+        }
+        if (tickTockSlow)
+        {
+            tickTockSlow.Stop();
+        }
+        if (tickTockFast)
+        {
+            tickTockFast.Stop();
         }
     }
 

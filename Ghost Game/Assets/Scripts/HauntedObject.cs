@@ -15,18 +15,18 @@ public class HauntedObject : MonoBehaviour
     public Room room;
     public Ghost ghost;
 
-    public float possessionTimeLimit = 5.0f;
-
     private AudioSource audio = null;
 
-    private float possessionTimer = 0.0f;
-    private bool ghostPossessing = false;
     private bool isPossessed = false;
+
+    private bool possessionPaused = false;
 
     void Start()
     {
         EventManager.OnPossessionStart += OnPossessionStart;
         EventManager.OnPossessionStop += OnPossessionStop;
+        EventManager.OnPossessionPause += OnPossessionPause;
+        EventManager.OnPossessionContinue += OnPossessionContinue;
         EventManager.OnPossessionComplete += OnPossessionComplete;
         audio = GetComponent<AudioSource>();
 
@@ -39,43 +39,56 @@ public class HauntedObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isPossessed && ghostPossessing)
+        
+    }
+    private void OnPossessionStart(Room posRoom, ObjectType type)
+    {
+        if (room == posRoom)
         {
-            possessionTimer += Time.deltaTime;
-            if(possessionTimer >= possessionTimeLimit)
-            {
-                EventManager.PossessionComplete(room, type);
-            }
+            isPossessed = false;
+            audio.Play();
         }
     }
-    private void OnPossessionStart(Room room, ObjectType type)
+
+    private void OnPossessionStop(Room posRoom, ObjectType type)
     {
-        isPossessed = false;
-        ghostPossessing = true;
-        possessionTimer = 0.0f;
-        audio.Play();
+        if (room == posRoom)
+        {
+            isPossessed = false;
+            audio.Stop();
+        }
     }
 
-    private void OnPossessionStop(Room room, ObjectType type)
+    private void OnPossessionPause(Room posRoom, ObjectType type)
     {
-        isPossessed = false;
-        ghostPossessing = false;
-        possessionTimer = 0.0f;
-        audio.Stop();
+        if (room == posRoom)
+        {
+            audio.Stop();
+            possessionPaused = true;
+        }
     }
 
-    private void OnPossessionComplete(Room room, ObjectType type)
+    private void OnPossessionContinue(Room posRoom, ObjectType type)
     {
-        isPossessed = true;
+        if (room == posRoom)
+        {
+            audio.Play();
+            possessionPaused = false;
+        }
+    }
+
+    private void OnPossessionComplete(Room posRoom, ObjectType type)
+    {
+        if (room == posRoom)
+        {
+            audio.Stop();
+            isPossessed = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
-        {
-            EventManager.StopPossession(room, type);
-        }
-        else if(other.tag == "Ghost")
+        if(other.tag == "Ghost")
         {
             EventManager.StartPossession(room,type);
         }

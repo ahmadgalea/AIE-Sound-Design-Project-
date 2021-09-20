@@ -23,6 +23,7 @@ public class Ghost : MonoBehaviour
     private GhostState state = GhostState.Inactive;
 
     private float timer = 0.0f;
+    private bool possessionPaused = false;
 
     private AudioSource audio = null;
 
@@ -30,6 +31,11 @@ public class Ghost : MonoBehaviour
     {
         EventManager.OnPossessionStart += OnPossessionStart;
         EventManager.OnPossessionStop += OnPossessionStop;
+        EventManager.OnPossessionPause += OnPossessionPause;
+        EventManager.OnPossessionContinue += OnPossessionContinue;
+        EventManager.OnPossessionComplete += OnPossessionComplete;
+        EventManager.OnLightOn += OnLightOn;
+        EventManager.OnLightOff += OnLightOff;
 
         audio = GetComponent<AudioSource>();
     }
@@ -46,35 +52,40 @@ public class Ghost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-
-        switch(state)
+        if (!possessionPaused)
         {
-            case GhostState.Inactive:
-                if(timer >= inactivePeriod)
-                {
-                    audio.Play();
-                    ChangeState(GhostState.Moving);
-                }
-                break;
-            case GhostState.Moving:
-                if (targetObject == null)
-                {
-                    TargetObject();
-                }
-                UpdatePosition();
-                break;
-            case GhostState.Possessing:
-                if (timer >= possessionPeriod)
-                {
-                    objects.Remove(targetObject);
-                    targetObject = null;
-                    ResetPosition();
-                    ChangeState(GhostState.Inactive);
-                }
-                break;
-            default:
-                break;
+            timer += Time.deltaTime;
+
+            switch (state)
+            {
+                case GhostState.Inactive:
+                    if (timer >= inactivePeriod)
+                    {
+                        ChangeState(GhostState.Moving);
+                    }
+                    break;
+                case GhostState.Moving:
+                    if (targetObject == null)
+                    {
+                        TargetObject();
+                        audio.Play();
+                    }
+            
+                    UpdatePosition();
+                    break;
+                case GhostState.Possessing:
+                    if (timer >= possessionPeriod)
+                    {
+                        EventManager.PossessionComplete(targetObject.room, targetObject.type);
+                        objects.Remove(targetObject);
+                        targetObject = null;
+                        ResetPosition();
+                        ChangeState(GhostState.Inactive);
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -86,8 +97,15 @@ public class Ghost : MonoBehaviour
 
     private void TargetObject()
     {
-        int randomInt = Random.Range(0, objects.Count);
-        targetObject = objects[randomInt];
+        if (objects.Count > 0)
+        {
+            int randomInt = Random.Range(0, objects.Count);
+            targetObject = objects[randomInt];
+        }
+        else
+        {
+            ChangeState(GhostState.Inactive);
+        }
     }
 
     private void UpdatePosition()
@@ -106,13 +124,60 @@ public class Ghost : MonoBehaviour
 
     private void OnPossessionStart(Room room, ObjectType type)
     {
+        possessionPaused = false;
         audio.Stop();
         ChangeState(GhostState.Possessing);
     }
 
     private void OnPossessionStop(Room room, ObjectType type)
     {
+        possessionPaused = false;
         ResetPosition();
         ChangeState(GhostState.Inactive);
+    }
+
+    private void OnPossessionComplete(Room room, ObjectType type)
+    {
+        possessionPaused = false;
+        ResetPosition();
+        ChangeState(GhostState.Inactive);
+    }
+
+    private void OnPossessionPause(Room room, ObjectType type)
+    {
+        if (targetObject)
+        {
+            if (targetObject.room == room)
+            {
+                possessionPaused = true;
+            }
+        }
+    }
+
+    private void OnPossessionContinue(Room room, ObjectType type)
+    {
+        if (targetObject)
+        {
+            if (targetObject.room == room)
+            {
+                possessionPaused = false;
+            }
+        }
+    }
+
+    private void OnLightOn(Room room)
+    {
+        if (targetObject && room == targetObject.room)
+        {
+            EventManager.PausePossession(targetObject.room, targetObject.type);
+        }
+    }
+
+    private void OnLightOff(Room room)
+    {
+        if (targetObject && room == targetObject.room)
+        {
+            EventManager.ContinuePossession(targetObject.room, targetObject.type);
+        }
     }
 }

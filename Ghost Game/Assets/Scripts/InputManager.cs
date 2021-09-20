@@ -24,5 +24,9 @@ public class InputManager : MonoBehaviour
         {
             EventManager.TurnOnLight(Room.Bathroom);
         }
+        if(Input.GetMouseButtonDown(0))
+        {
+            EventManager.Shoot();
+        }
     }
 }

@@ -68,11 +68,9 @@ public class Ghost : MonoBehaviour
                     if (targetObject == null)
                     {
                         TargetObject();
-                    }
-                    else
-                    {
                         audio.Play();
                     }
+            
                     UpdatePosition();
                     break;
                 case GhostState.Possessing:

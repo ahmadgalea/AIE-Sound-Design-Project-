@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         RaycastHit hitObject;
-        Physics.Raycast(transform.position, transform.forward,out hitObject,2);
         if (Physics.Raycast(transform.position, transform.forward, out hitObject, 2))
         {
             HauntedObject hauntedObject = hitObject.transform.gameObject.GetComponentInParent<HauntedObject>();

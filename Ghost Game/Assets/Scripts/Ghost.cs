@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GhostState
 {
@@ -16,6 +17,8 @@ public class Ghost : MonoBehaviour
     public float moveSpeed = 5.0f;
 
     public GameObject spawnPosition = null;
+
+    public Slider hauntingTimer = null;
 
     private List<HauntedObject> objects = new List<HauntedObject>();
     private HauntedObject targetObject = null;
@@ -45,7 +48,7 @@ public class Ghost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!possessionPaused)
+        if (!possessionPaused && objects.Count > 0)
         {
             timer += Time.deltaTime;
 
@@ -68,6 +71,7 @@ public class Ghost : MonoBehaviour
                     UpdatePosition();
                     break;
                 case GhostState.Possessing:
+                    UpdateHauntingSlider(timer);
                     if (timer >= possessionPeriod)
                     {
                         EventManager.PossessionComplete(targetObject.room, targetObject.type);
@@ -87,6 +91,15 @@ public class Ghost : MonoBehaviour
     {
         state = newState;
         timer = 0.0f;
+    }
+
+    private void UpdateHauntingSlider(float timer)
+    {
+        if(hauntingTimer != null && possessionPeriod > 0)
+        {
+            hauntingTimer.value = timer / possessionPeriod;
+        }
+
     }
 
     private void TargetObject()
@@ -118,6 +131,10 @@ public class Ghost : MonoBehaviour
 
     private void OnPossessionStart(Room room, ObjectType type)
     {
+        if (hauntingTimer != null)
+        {
+            hauntingTimer.transform.parent.gameObject.SetActive(true);
+        }
         possessionPaused = false;
         audio.Stop();
         ChangeState(GhostState.Possessing);
@@ -125,6 +142,11 @@ public class Ghost : MonoBehaviour
 
     private void OnPossessionStop(Room room, ObjectType type)
     {
+        if (hauntingTimer != null)
+        {
+            hauntingTimer.transform.parent.gameObject.SetActive(false);
+            hauntingTimer.value = 0;
+        }
         possessionPaused = false;
         ResetPosition();
         objects.RemoveAll(thisObject => thisObject.GetState() == ObjectState.Saved);
@@ -133,6 +155,11 @@ public class Ghost : MonoBehaviour
 
     private void OnPossessionComplete(Room room, ObjectType type)
     {
+        if (hauntingTimer != null)
+        {
+            hauntingTimer.transform.parent.gameObject.SetActive(false);
+            hauntingTimer.value = 0;
+        }
         possessionPaused = false;
         ResetPosition();
         ChangeState(GhostState.Inactive);

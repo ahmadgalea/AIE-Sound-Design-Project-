@@ -26,15 +26,21 @@ public class PlayerWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateShoot();
+        UpdateRaycast();
+    }
+
+    private void UpdateShoot()
+    {
         // update shoot
-        if(isShooting)
+        if (isShooting)
         {
             shootTimer += Time.deltaTime;
-            if(shootTimeGuage)
+            if (shootTimeGuage)
             {
                 shootTimeGuage.value = shootTimer / totalShootTime;
             }
-            if(shootTimer >= totalShootTime)
+            if (shootTimer >= totalShootTime)
             {
                 HauntedObject hauntedObject = highlightedObject.GetTarget();
                 EventManager.StopPossession(hauntedObject.room, hauntedObject.type);
@@ -44,13 +50,21 @@ public class PlayerWeapon : MonoBehaviour
                 isShooting = false;
             }
         }
+    }
+
+    private void UpdateRaycast()
+    {
+        highlightedCursor.enabled = false;
+        dehighlightedCursor.enabled = true;
+        highlightedObject = null;
+        highlighedSwitch = null;
 
         // update raycasy
         RaycastHit hitObject;
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitObject, castDistance))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitObject, castDistance))
         {
             Switch lightSwitch = hitObject.transform.gameObject.GetComponent<Switch>();
-            if(lightSwitch)
+            if (lightSwitch)
             {
                 highlighedSwitch = lightSwitch;
                 highlightedCursor.enabled = true;
@@ -59,7 +73,7 @@ public class PlayerWeapon : MonoBehaviour
             }
 
             Ghost ghost = hitObject.transform.gameObject.GetComponent<Ghost>();
-            if (ghost && ghost != highlightedObject)
+            if (ghost)
             {
                 highlightedObject = ghost;
                 highlightedCursor.enabled = true;
@@ -67,16 +81,14 @@ public class PlayerWeapon : MonoBehaviour
                 return;
             }
         }
-        highlightedCursor.enabled = false;
-        dehighlightedCursor.enabled = true;
-        highlightedObject = null;
-        highlighedSwitch = null;
     }
 
     private void OnShootStart()
     {
         if(highlightedObject)
         {
+            shootTimeGuage.value = 0;
+            shootTimer = 0.0f;
             shootTimeGuage.transform.parent.gameObject.SetActive(true);
             isShooting = true;
         }

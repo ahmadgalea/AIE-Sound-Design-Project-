@@ -17,7 +17,7 @@ public class Ghost : MonoBehaviour
 
     public GameObject spawnPosition = null;
 
-    private List<HauntedObject> objects;
+    private List<HauntedObject> objects = new List<HauntedObject>();
     private HauntedObject targetObject = null;
 
     private GhostState state = GhostState.Inactive;
@@ -38,15 +38,8 @@ public class Ghost : MonoBehaviour
         EventManager.OnLightOff += OnLightOff;
 
         audio = GetComponent<AudioSource>();
-    }
 
-    public void AddObject(HauntedObject hauntedObject)
-    {
-        if(objects == null)
-        {
-            objects = new List<HauntedObject>();
-        }
-        objects.Add(hauntedObject);
+        objects.AddRange(FindObjectsOfType<HauntedObject>());
     }
 
     // Update is called once per frame
@@ -59,6 +52,7 @@ public class Ghost : MonoBehaviour
             switch (state)
             {
                 case GhostState.Inactive:
+                    targetObject = null;
                     if (timer >= inactivePeriod)
                     {
                         ChangeState(GhostState.Moving);
@@ -133,6 +127,7 @@ public class Ghost : MonoBehaviour
     {
         possessionPaused = false;
         ResetPosition();
+        objects.RemoveAll(thisObject => thisObject.GetState() == ObjectState.Saved);
         ChangeState(GhostState.Inactive);
     }
 

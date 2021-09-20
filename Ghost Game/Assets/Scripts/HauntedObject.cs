@@ -9,22 +9,15 @@ public enum ObjectType
     Water
 }
 
-public enum ObjectState
-{
-    Normal,
-    BeingPossessed,
-    Possessed,
-    Saved
-}
-
 public class HauntedObject : MonoBehaviour
 {
     public ObjectType type;
     public Room room;
+    public Ghost ghost;
 
     private AudioSource audio = null;
 
-    private ObjectState state = ObjectState.Normal;
+    private bool isPossessed = false;
 
     private bool possessionPaused = false;
 
@@ -37,7 +30,10 @@ public class HauntedObject : MonoBehaviour
         EventManager.OnPossessionComplete += OnPossessionComplete;
         audio = GetComponent<AudioSource>();
 
- 
+        if(ghost)
+        {
+            ghost.AddObject(this);
+        }
     }
 
     // Update is called once per frame
@@ -45,20 +41,20 @@ public class HauntedObject : MonoBehaviour
     {
         
     }
-    private void OnPossessionStart(Room posRoom, ObjectType posType)
+    private void OnPossessionStart(Room posRoom, ObjectType type)
     {
-        if (room == posRoom && posType == type)
+        if (room == posRoom)
         {
-            state = ObjectState.BeingPossessed;
+            isPossessed = false;
             audio.Play();
         }
     }
 
-    private void OnPossessionStop(Room posRoom, ObjectType posType)
+    private void OnPossessionStop(Room posRoom, ObjectType type)
     {
-        if (room == posRoom && posType == type )
+        if (room == posRoom)
         {
-            state = ObjectState.Saved;
+            isPossessed = false;
             audio.Stop();
         }
     }
@@ -81,18 +77,13 @@ public class HauntedObject : MonoBehaviour
         }
     }
 
-    private void OnPossessionComplete(Room posRoom, ObjectType posType)
+    private void OnPossessionComplete(Room posRoom, ObjectType type)
     {
-        if (room == posRoom && posType == type)
+        if (room == posRoom)
         {
             audio.Stop();
-            state = ObjectState.Possessed;
+            isPossessed = true;
         }
-    }
-
-    public ObjectState GetState()
-    {
-        return state;
     }
 
     private void OnTriggerEnter(Collider other)

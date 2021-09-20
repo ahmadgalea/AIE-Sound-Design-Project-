@@ -9,6 +9,14 @@ public enum ObjectType
     Water
 }
 
+public enum ObjectState
+{
+    Normal,
+    BeingPossessed,
+    Possessed,
+    Saved
+}
+
 public class HauntedObject : MonoBehaviour
 {
     public ObjectType type;
@@ -17,7 +25,7 @@ public class HauntedObject : MonoBehaviour
 
     private AudioSource audio = null;
 
-    private bool isPossessed = false;
+    private ObjectState state = ObjectState.Normal;
 
     private bool possessionPaused = false;
 
@@ -45,7 +53,7 @@ public class HauntedObject : MonoBehaviour
     {
         if (room == posRoom)
         {
-            isPossessed = false;
+            state = ObjectState.BeingPossessed;
             audio.Play();
         }
     }
@@ -54,7 +62,7 @@ public class HauntedObject : MonoBehaviour
     {
         if (room == posRoom)
         {
-            isPossessed = false;
+            state = ObjectState.Saved;
             audio.Stop();
         }
     }
@@ -82,7 +90,7 @@ public class HauntedObject : MonoBehaviour
         if (room == posRoom)
         {
             audio.Stop();
-            isPossessed = true;
+            state = ObjectState.Possessed;
         }
     }
 

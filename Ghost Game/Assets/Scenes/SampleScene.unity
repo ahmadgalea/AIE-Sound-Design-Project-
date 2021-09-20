@@ -1376,7 +1376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5730769276402846824, guid: 9defc6d75cacace4d877c94378bc0557, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.1
+      value: 4.24
       objectReference: {fileID: 0}
     - target: {fileID: 5730769276402846824, guid: 9defc6d75cacace4d877c94378bc0557, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1763,7 +1763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inactivePeriod: 2
   possessionPeriod: 10
-  moveSpeed: 2
+  moveSpeed: 1
   spawnPosition: {fileID: 172640547}
 --- !u!65 &1370682646
 BoxCollider:

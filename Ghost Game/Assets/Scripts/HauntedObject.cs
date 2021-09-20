@@ -9,15 +9,22 @@ public enum ObjectType
     Water
 }
 
+public enum ObjectState
+{
+    Normal,
+    BeingPossessed,
+    Possessed,
+    Saved
+}
+
 public class HauntedObject : MonoBehaviour
 {
     public ObjectType type;
     public Room room;
-    public Ghost ghost;
 
     private AudioSource audio = null;
 
-    private bool isPossessed = false;
+    private ObjectState state = ObjectState.Normal;
 
     private bool possessionPaused = false;
 
@@ -30,10 +37,7 @@ public class HauntedObject : MonoBehaviour
         EventManager.OnPossessionComplete += OnPossessionComplete;
         audio = GetComponent<AudioSource>();
 
-        if(ghost)
-        {
-            ghost.AddObject(this);
-        }
+ 
     }
 
     // Update is called once per frame
@@ -41,20 +45,20 @@ public class HauntedObject : MonoBehaviour
     {
         
     }
-    private void OnPossessionStart(Room posRoom, ObjectType type)
+    private void OnPossessionStart(Room posRoom, ObjectType posType)
     {
-        if (room == posRoom)
+        if (room == posRoom && posType == type)
         {
-            isPossessed = false;
+            state = ObjectState.BeingPossessed;
             audio.Play();
         }
     }
 
-    private void OnPossessionStop(Room posRoom, ObjectType type)
+    private void OnPossessionStop(Room posRoom, ObjectType posType)
     {
-        if (room == posRoom)
+        if (room == posRoom && posType == type )
         {
-            isPossessed = false;
+            state = ObjectState.Saved;
             audio.Stop();
         }
     }
@@ -77,18 +81,23 @@ public class HauntedObject : MonoBehaviour
         }
     }
 
-    private void OnPossessionComplete(Room posRoom, ObjectType type)
+    private void OnPossessionComplete(Room posRoom, ObjectType posType)
     {
-        if (room == posRoom)
+        if (room == posRoom && posType == type)
         {
             audio.Stop();
-            isPossessed = true;
+            state = ObjectState.Possessed;
         }
+    }
+
+    public ObjectState GetState()
+    {
+        return state;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Ghost")
+        if(other.tag == "Ghost" && state == ObjectState.Normal)
         {
             EventManager.StartPossession(room,type);
         }

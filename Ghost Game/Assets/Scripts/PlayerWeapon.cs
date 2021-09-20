@@ -59,4 +59,9 @@ public class PlayerWeapon : MonoBehaviour
             EventManager.TurnOnLight(highlighedSwitch.room);
         }
     }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, transform.position-10*transform.forward);
+    }
 }

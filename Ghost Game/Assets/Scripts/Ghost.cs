@@ -17,6 +17,7 @@ public class Ghost : MonoBehaviour
     public float moveSpeed = 5.0f;
 
     public GameObject spawnPosition = null;
+    public GameObject player;
 
     public Slider hauntingTimer = null;
 
@@ -43,6 +44,7 @@ public class Ghost : MonoBehaviour
         audio = GetComponent<AudioSource>();
 
         objects.AddRange(FindObjectsOfType<HauntedObject>());
+        ResetPosition();
     }
 
     // Update is called once per frame
@@ -84,6 +86,10 @@ public class Ghost : MonoBehaviour
                 default:
                     break;
             }
+            if(player != null)
+            {
+                transform.LookAt(player.transform.position);
+            }
         }
     }
 
@@ -118,7 +124,7 @@ public class Ghost : MonoBehaviour
     private void UpdatePosition()
     {
         var direction = (targetObject.transform.position - transform.position).normalized;
-        transform.position += moveSpeed * Time.deltaTime*direction;
+        transform.position += moveSpeed* Time.deltaTime * (new Vector3(direction.x,0,direction.z));
     }
 
     private void ResetPosition()
@@ -162,6 +168,7 @@ public class Ghost : MonoBehaviour
         }
         possessionPaused = false;
         ResetPosition();
+        objects.RemoveAll(thisObject => thisObject.GetState() == ObjectState.Saved);
         ChangeState(GhostState.Inactive);
     }
 

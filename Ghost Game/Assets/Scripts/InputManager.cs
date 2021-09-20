@@ -26,7 +26,11 @@ public class InputManager : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(0))
         {
-            EventManager.Shoot();
+            EventManager.ShootStart();
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            EventManager.ShootEnd();
         }
     }
 }

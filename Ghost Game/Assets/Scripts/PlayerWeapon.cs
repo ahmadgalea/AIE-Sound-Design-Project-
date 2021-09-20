@@ -7,19 +7,45 @@ public class PlayerWeapon : MonoBehaviour
 {
     public Image highlightedCursor = null;
     public Image dehighlightedCursor = null;
+    public Slider shootTimeGuage = null; 
     public float castDistance = 3;
+    public float totalShootTime = 2;
 
-    private HauntedObject highlightedObject = null;
+    private Ghost highlightedObject = null;
     private Switch highlighedSwitch = null;
+
+    private bool isShooting = false;
+    private float shootTimer = 0.0f;
 
     void Start()
     {
-        EventManager.OnShoot += OnShoot;
+        EventManager.OnShootStart += OnShootStart;
+        EventManager.OnShootEnd += OnShootEnd;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // update shoot
+        if(isShooting)
+        {
+            shootTimer += Time.deltaTime;
+            if(shootTimeGuage)
+            {
+                shootTimeGuage.value = shootTimer / totalShootTime;
+            }
+            if(shootTimer >= totalShootTime)
+            {
+                HauntedObject hauntedObject = highlightedObject.GetTarget();
+                EventManager.StopPossession(hauntedObject.room, hauntedObject.type);
+                shootTimeGuage.value = 0;
+                shootTimeGuage.transform.parent.gameObject.SetActive(false);
+                shootTimer = 0.0f;
+                isShooting = false;
+            }
+        }
+
+        // update raycasy
         RaycastHit hitObject;
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitObject, castDistance))
         {
@@ -32,10 +58,10 @@ public class PlayerWeapon : MonoBehaviour
                 return;
             }
 
-            HauntedObject hauntedObject = hitObject.transform.gameObject.GetComponentInParent<HauntedObject>();
-            if (hauntedObject && hauntedObject != highlightedObject)
+            Ghost ghost = hitObject.transform.gameObject.GetComponent<Ghost>();
+            if (ghost && ghost != highlightedObject)
             {
-                highlightedObject = hauntedObject;
+                highlightedObject = ghost;
                 highlightedCursor.enabled = true;
                 dehighlightedCursor.enabled = false;
                 return;
@@ -47,16 +73,31 @@ public class PlayerWeapon : MonoBehaviour
         highlighedSwitch = null;
     }
 
-    private void OnShoot()
+    private void OnShootStart()
     {
         if(highlightedObject)
         {
-            EventManager.StopPossession(highlightedObject.room, highlightedObject.type);
+            shootTimeGuage.transform.parent.gameObject.SetActive(true);
+            isShooting = true;
         }
 
         if (highlighedSwitch)
         {
             EventManager.TurnOnLight(highlighedSwitch.room);
+        }
+        
+    }
+
+    private void OnShootEnd()
+    {
+        if (highlightedObject)
+        {
+            if (isShooting)
+            {
+                shootTimeGuage.value = 0;
+                shootTimeGuage.transform.parent.gameObject.SetActive(false);
+                isShooting = false;
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ public class PlayerWeapon : MonoBehaviour
     public Image dehighlightedCursor = null;
     public float castDistance = 3;
 
-    private HauntedObject highlightedObject = null;
+    private Ghost highlightedObject = null;
     private Switch highlighedSwitch = null;
 
     void Start()
@@ -32,10 +32,10 @@ public class PlayerWeapon : MonoBehaviour
                 return;
             }
 
-            HauntedObject hauntedObject = hitObject.transform.gameObject.GetComponentInParent<HauntedObject>();
-            if (hauntedObject && hauntedObject != highlightedObject)
+            Ghost ghost = hitObject.transform.gameObject.GetComponentInParent<Ghost>();
+            if (ghost && ghost != highlightedObject)
             {
-                highlightedObject = hauntedObject;
+                highlightedObject = ghost;
                 highlightedCursor.enabled = true;
                 dehighlightedCursor.enabled = false;
                 return;

@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: 1
-  lightDuration: 5
-  flashingDuration: 1
+  lightDuration: 10
+  flashingDuration: 3
   flashPeriod: 0.2
   tickTockSlow: {fileID: 246481082126513692}
   tickTockFast: {fileID: 5174252166582195766}

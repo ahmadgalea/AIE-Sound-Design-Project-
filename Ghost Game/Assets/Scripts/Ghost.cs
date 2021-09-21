@@ -42,10 +42,17 @@ public class Ghost : MonoBehaviour
         EventManager.OnLightOn += OnLightOn;
         EventManager.OnLightOff += OnLightOff;
 
+        EventManager.OnGameStateChanged += OnGameStateChanged;
+
         audio = GetComponent<AudioSource>();
         renderer = transform.GetComponentInChildren<MeshRenderer>();
         renderer.enabled = false;
 
+        Reset();
+    }
+
+    private void Reset()
+    {
         objects.AddRange(FindObjectsOfType<HauntedObject>());
         ResetPosition();
     }
@@ -219,6 +226,14 @@ public class Ghost : MonoBehaviour
         {
             EventManager.ContinuePossession(targetObject.room, targetObject.type);
             renderer.enabled = false;
+        }
+    }
+
+    private void OnGameStateChanged(GameState newState)
+    {
+        if(newState == GameState.Playing)
+        {
+            Reset();
         }
     }
 }

@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public enum GameState
 {
-    Menu,
+    StartMenu,
     Paused,
     Playing,
     Won,
-    Lost
+    Lost,
+    Quit
 }
 
 public class GameManager : MonoBehaviour
@@ -18,22 +19,25 @@ public class GameManager : MonoBehaviour
     public Text possessedObjectsCounter;
     public Text savedObjectsCounter;
 
+    public GameObject hudScreen = null;
+    public GameObject gameWinScreen = null;
+    public GameObject gameLossScreen = null;
+
     private HauntedObject[] objects;
 
     int normalObjects = 0;
     int possessedObjects = 0;
     int savedObjects = 0;
 
+    private GameState state = GameState.Playing;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        objects = FindObjectsOfType<HauntedObject>();
-        normalObjects = objects.Length;
-        possessedObjects = 0;
-        savedObjects = 0;
+        Reset();
 
-        UpdateUI();
+        EventManager.OnGameStateChanged += OnGameStateChanged;
 
         EventManager.OnPossessionStart += OnPossessionStart;
         EventManager.OnPossessionStop += OnPossessionStop;
@@ -47,6 +51,68 @@ public class GameManager : MonoBehaviour
     {
     }
 
+    private void Reset()
+    {
+        objects = FindObjectsOfType<HauntedObject>();
+        normalObjects = objects.Length;
+        possessedObjects = 0;
+        savedObjects = 0;
+        UpdateUI();
+    }
+
+    private void OnGameStateChanged(GameState newState)
+    {
+        switch(newState)
+        {
+            case GameState.Playing:
+                Reset();
+                if(hudScreen != null)
+                {
+                    hudScreen.SetActive(true);
+                }
+                if (gameLossScreen != null)
+                {
+                    gameLossScreen.SetActive(false);
+                }
+                if (gameWinScreen != null)
+                {
+                    gameWinScreen.SetActive(false);
+                }
+                break;
+            case GameState.Won:
+                if (hudScreen != null)
+                {
+                    hudScreen.SetActive(false);
+                }
+                if (gameLossScreen != null)
+                {
+                    gameLossScreen.SetActive(false);
+                }
+                if (gameWinScreen != null)
+                {
+                    gameWinScreen.SetActive(true);
+                }
+                break;
+            case GameState.Lost:
+                if (hudScreen != null)
+                {
+                    hudScreen.SetActive(false);
+                }
+                if (gameLossScreen != null)
+                {
+                    gameLossScreen.SetActive(true);
+                }
+                if (gameWinScreen != null)
+                {
+                    gameWinScreen.SetActive(false);
+                }
+                break;
+            case GameState.Quit:
+                Application.Quit();
+                break;
+
+        }
+    }
     private void UpdateUI()
     {
         normalObjectsCounter.text = "Objects Remaining: " + normalObjects;
@@ -68,7 +134,7 @@ public class GameManager : MonoBehaviour
         {
             if(savedObjects > possessedObjects)
             {
-                Debug.Log("Win");
+                EventManager.ChangeGameState(GameState.Won);
             }
         }
     }
@@ -82,7 +148,7 @@ public class GameManager : MonoBehaviour
         {
             if (savedObjects <= possessedObjects)
             {
-                Debug.Log("Loss");
+                EventManager.ChangeGameState(GameState.Lost);
             }
         }
     }

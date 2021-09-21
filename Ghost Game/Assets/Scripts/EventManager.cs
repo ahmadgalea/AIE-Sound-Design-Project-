@@ -28,6 +28,9 @@ public class EventManager : MonoBehaviour
     public static event GunAction OnShootStart;
     public static event GunAction OnShootEnd;
 
+    public delegate void GameStateEvent(GameState newState);
+    public static event GameStateEvent OnGameStateChanged;
+
     // rooms: 0-kitchen, 1-dining, 2-bathroom
     public static void TurnOnLight(int room)
     {
@@ -124,6 +127,19 @@ public class EventManager : MonoBehaviour
         if (EventManager.OnShootEnd != null)
         {
             EventManager.OnShootEnd();
+        }
+    }
+
+    public static void ChangeGameState(int newState)
+    {
+        ChangeGameState((GameState)newState);
+    }
+
+    public static void ChangeGameState(GameState newState)
+    {
+        if(EventManager.OnGameStateChanged != null)
+        {
+            EventManager.OnGameStateChanged(newState);
         }
     }
 

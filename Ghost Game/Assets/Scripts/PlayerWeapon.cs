@@ -24,6 +24,8 @@ public class PlayerWeapon : MonoBehaviour
         EventManager.OnShootStart += OnShootStart;
         EventManager.OnShootEnd += OnShootEnd;
         EventManager.OnLightOff += OnLightOff;
+
+        EventManager.OnGameStateChanged += OnGameStateChanged;
     }
 
     // Update is called once per frame
@@ -124,5 +126,14 @@ public class PlayerWeapon : MonoBehaviour
     private void OnLightOff(Room room)
     {
         aLightIsOn = false;
+    }
+
+    private void OnGameStateChanged(GameState newState)
+    {
+        //switch(newState)
+        //{
+        //    case GameState.Playing:
+        //        transform.parent.GetComponentInParent<>();
+        //}
     }
 }

@@ -12,25 +12,28 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (GameManager.state == GameState.Playing)
         {
-            EventManager.TurnOnLight(Room.Dining);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            EventManager.TurnOnLight(Room.Kitchen);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            EventManager.TurnOnLight(Room.Bathroom);
-        }
-        if(Input.GetMouseButtonDown(0))
-        {
-            EventManager.ShootStart();
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            EventManager.ShootEnd();
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                EventManager.TurnOnLight(Room.Dining);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                EventManager.TurnOnLight(Room.Kitchen);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                EventManager.TurnOnLight(Room.Bathroom);
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                EventManager.ShootStart();
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                EventManager.ShootEnd();
+            }
         }
     }
 }

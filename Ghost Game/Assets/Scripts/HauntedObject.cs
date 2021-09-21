@@ -74,7 +74,7 @@ public class HauntedObject : MonoBehaviour
 
     private void OnPossessionContinue(Room posRoom, ObjectType type)
     {
-        if (room == posRoom)
+        if (state == ObjectState.BeingPossessed && room == posRoom)
         {
             audio.Play();
             possessionPaused = false;

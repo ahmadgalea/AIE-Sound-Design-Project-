@@ -224,7 +224,7 @@ public class Ghost : MonoBehaviour
 
     private void OnLightOff(Room room)
     {
-        if (targetObject && room == targetObject.room)
+        if (targetObject != null && room == targetObject.room)
         {
             EventManager.ContinuePossession(targetObject.room, targetObject.type);
             renderer.enabled = false;

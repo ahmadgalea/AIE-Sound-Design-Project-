@@ -4477,6 +4477,30 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 9be1deddd3ea2ec4bab6ae6be062550a, type: 3}
+    - target: {fileID: 3446704387542383895, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
+      propertyPath: m_Size.x
+      value: 1.1251793
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446704387542383895, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
+      propertyPath: m_Size.y
+      value: 3.459011
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446704387542383895, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
+      propertyPath: m_Size.z
+      value: 1.0087016
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446704387542383895, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
+      propertyPath: m_Center.x
+      value: 0.7282362
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446704387542383895, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
+      propertyPath: m_Center.y
+      value: -0.2716849
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446704387542383895, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
+      propertyPath: m_Center.z
+      value: 0.4127919
+      objectReference: {fileID: 0}
     - target: {fileID: 3446704387542383896, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
       propertyPath: m_Name
       value: HauntedGlasses

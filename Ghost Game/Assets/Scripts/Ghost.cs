@@ -72,6 +72,8 @@ public class Ghost : MonoBehaviour
             {
                 case GhostState.Inactive:
                     targetObject = null;
+                    objects.RemoveAll(thisObject => thisObject.GetState() == ObjectState.Saved);
+                    objects.RemoveAll(thisObject => thisObject.GetState() == ObjectState.Possessed);
                     if (timer >= inactivePeriod)
                     {
                         ChangeState(GhostState.Moving);
@@ -170,7 +172,7 @@ public class Ghost : MonoBehaviour
         }
         possessionPaused = false;
         ResetPosition();
-        objects.RemoveAll(thisObject => thisObject.GetState() == ObjectState.Saved);
+        //objects.RemoveAll(thisObject => thisObject.GetState() == ObjectState.Saved);
         ChangeState(GhostState.Inactive);
         renderer.enabled = false;
     }
@@ -184,7 +186,7 @@ public class Ghost : MonoBehaviour
         }
         possessionPaused = false;
         ResetPosition();
-        objects.RemoveAll(thisObject => thisObject.GetState() == ObjectState.Saved);
+        //objects.RemoveAll(thisObject => thisObject.GetState() == ObjectState.Possessed);
         ChangeState(GhostState.Inactive);
         renderer.enabled = false;
     }

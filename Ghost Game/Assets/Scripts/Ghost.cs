@@ -30,6 +30,7 @@ public class Ghost : MonoBehaviour
     private bool possessionPaused = false;
 
     private AudioSource audio = null;
+    private Renderer renderer = null;
 
     void Start()
     {
@@ -42,6 +43,8 @@ public class Ghost : MonoBehaviour
         EventManager.OnLightOff += OnLightOff;
 
         audio = GetComponent<AudioSource>();
+        renderer = transform.GetComponentInChildren<Renderer>();
+        //renderer.enabled = false;
 
         objects.AddRange(FindObjectsOfType<HauntedObject>());
         ResetPosition();
@@ -204,6 +207,7 @@ public class Ghost : MonoBehaviour
         if (targetObject && room == targetObject.room)
         {
             EventManager.PausePossession(targetObject.room, targetObject.type);
+            //renderer.enabled = true;
         }
     }
 
@@ -212,6 +216,7 @@ public class Ghost : MonoBehaviour
         if (targetObject && room == targetObject.room)
         {
             EventManager.ContinuePossession(targetObject.room, targetObject.type);
+            //renderer.enabled = false;
         }
     }
 }

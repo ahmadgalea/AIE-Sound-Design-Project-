@@ -3400,6 +3400,10 @@ PrefabInstance:
       value: HauntedMirror
       objectReference: {fileID: 0}
     - target: {fileID: 3446704387542383897, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
+      propertyPath: room
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446704387542383897, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
       propertyPath: type
       value: 1
       objectReference: {fileID: 0}

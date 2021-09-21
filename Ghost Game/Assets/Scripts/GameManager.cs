@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     int possessedObjects = 0;
     int savedObjects = 0;
 
-    private GameState state = GameState.Playing;
+    public static GameState state = GameState.Playing;
 
 
     // Start is called before the first frame update

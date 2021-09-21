@@ -3358,7 +3358,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: a1808bddc9d567141837c149a99947f7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 7dd702d1cf2fec341ada6a60ae8ec8d5, type: 2}
     - target: {fileID: 919132149155446097, guid: a1808bddc9d567141837c149a99947f7, type: 3}
       propertyPath: m_Name
       value: Mirror 1
@@ -4030,7 +4030,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 0ad983338a086bb45902e5ee434eb2e9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 9d1ff6b6d48377d41a29781c19bb6042, type: 2}
     - target: {fileID: 919132149155446097, guid: 0ad983338a086bb45902e5ee434eb2e9, type: 3}
       propertyPath: m_Name
       value: Kitchen bench

@@ -17,10 +17,13 @@ public class PlayerWeapon : MonoBehaviour
     private bool isShooting = false;
     private float shootTimer = 0.0f;
 
+    private bool aLightIsOn = false;
+
     void Start()
     {
         EventManager.OnShootStart += OnShootStart;
         EventManager.OnShootEnd += OnShootEnd;
+        EventManager.OnLightOff += OnLightOff;
     }
 
     // Update is called once per frame
@@ -96,9 +99,10 @@ public class PlayerWeapon : MonoBehaviour
             isShooting = true;
         }
 
-        if (highlighedSwitch)
+        if (highlighedSwitch && !aLightIsOn)
         {
             EventManager.TurnOnLight(highlighedSwitch.room);
+            aLightIsOn = true;
         }
         
     }
@@ -114,5 +118,10 @@ public class PlayerWeapon : MonoBehaviour
                 isShooting = false;
             }
         }
+    }
+
+    private void OnLightOff(Room room)
+    {
+        aLightIsOn = false;
     }
 }

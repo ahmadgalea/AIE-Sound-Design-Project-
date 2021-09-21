@@ -861,6 +861,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3446704387413764063, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
   m_PrefabInstance: {fileID: 247728169}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &294196454 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2374727442784968775, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
+  m_PrefabInstance: {fileID: 1236254818}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &310431614
 GameObject:
   m_ObjectHideFlags: 0
@@ -2175,6 +2180,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3446704387542383894, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446704387542383894, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 986a2af446c13454a92aead4563184c2, type: 3}
@@ -2548,7 +2557,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh40122
+  m_Name: pb_Mesh124248
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3742,6 +3751,10 @@ PrefabInstance:
       propertyPath: ghost
       value: 
       objectReference: {fileID: 1370682645}
+    - target: {fileID: 3446704387542383897, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
+      propertyPath: possessionCancelledAudio
+      value: 
+      objectReference: {fileID: 294196454}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 695cef54a4ace6b46a4e2601ffc9ee85, type: 3}
 --- !u!4 &1236254819 stripped

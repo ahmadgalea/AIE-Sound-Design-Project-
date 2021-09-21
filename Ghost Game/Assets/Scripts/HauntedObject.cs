@@ -22,7 +22,9 @@ public class HauntedObject : MonoBehaviour
     public ObjectType type;
     public Room room;
 
-    private AudioSource audio = null;
+    public AudioSource possessionAudio = null;
+    public AudioSource possessionConcludedAudio = null;
+    public AudioSource possessionCancelledAudio = null;
 
     private ObjectState state = ObjectState.Normal;
 
@@ -38,8 +40,6 @@ public class HauntedObject : MonoBehaviour
 
         EventManager.OnGameStateChanged += OnGameStateChanged;
 
-        audio = GetComponent<AudioSource>();
-
 
     }
 
@@ -53,7 +53,7 @@ public class HauntedObject : MonoBehaviour
         if (room == posRoom && posType == type)
         {
             state = ObjectState.BeingPossessed;
-            audio.Play();
+            possessionAudio.Play();
         }
     }
 
@@ -62,7 +62,8 @@ public class HauntedObject : MonoBehaviour
         if (room == posRoom && posType == type)
         {
             state = ObjectState.Saved;
-            audio.Stop();
+            possessionAudio.Stop();
+            possessionCancelledAudio.Play();
         }
     }
 
@@ -70,7 +71,7 @@ public class HauntedObject : MonoBehaviour
     {
         if (room == posRoom)
         {
-            audio.Stop();
+            possessionAudio.Stop();
             possessionPaused = true;
         }
     }
@@ -79,7 +80,7 @@ public class HauntedObject : MonoBehaviour
     {
         if (state == ObjectState.BeingPossessed && room == posRoom)
         {
-            audio.Play();
+            possessionAudio.Play();
             possessionPaused = false;
         }
     }
@@ -88,8 +89,9 @@ public class HauntedObject : MonoBehaviour
     {
         if (room == posRoom && posType == type)
         {
-            audio.Stop();
+            possessionAudio.Stop();
             state = ObjectState.Possessed;
+            possessionConcludedAudio.Play();
         }
     }
 

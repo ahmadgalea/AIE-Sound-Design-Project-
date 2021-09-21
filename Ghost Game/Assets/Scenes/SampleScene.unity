@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.38300994, g: 0.42680025, b: 0.5377358, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 2f2817144d289c64b961d16e3f3440e7, type: 2}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2375,7 +2375,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh40122
+  m_Name: pb_Mesh50814
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4975,7 +4975,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685163508}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14, y: 3.1, z: -11.5}
+  m_LocalPosition: {x: 14, y: 4.6, z: -11.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1353557668}

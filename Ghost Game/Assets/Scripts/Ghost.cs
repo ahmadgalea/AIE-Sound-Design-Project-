@@ -93,6 +93,11 @@ public class Ghost : MonoBehaviour
         }
     }
 
+    public HauntedObject GetTarget()
+    {
+        return targetObject;
+    }
+
     private void ChangeState(GhostState newState)
     {
         state = newState;

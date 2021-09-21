@@ -25,7 +25,8 @@ public class EventManager : MonoBehaviour
     public static event AnonObjectInteraction OnDehighlightObject;
 
     public delegate void GunAction();
-    public static event GunAction OnShoot;
+    public static event GunAction OnShootStart;
+    public static event GunAction OnShootEnd;
 
     // rooms: 0-kitchen, 1-dining, 2-bathroom
     public static void TurnOnLight(int room)
@@ -110,11 +111,19 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public static void Shoot()
+    public static void ShootStart()
     {
-        if(EventManager.OnShoot != null)
+        if(EventManager.OnShootStart != null)
         {
-            EventManager.OnShoot();
+            EventManager.OnShootStart();
+        }
+    }
+
+    public static void ShootEnd()
+    {
+        if (EventManager.OnShootEnd != null)
+        {
+            EventManager.OnShootEnd();
         }
     }
 

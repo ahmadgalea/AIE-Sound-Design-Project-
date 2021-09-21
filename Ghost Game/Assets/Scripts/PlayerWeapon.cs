@@ -42,8 +42,11 @@ public class PlayerWeapon : MonoBehaviour
             }
             if (shootTimer >= totalShootTime)
             {
-                HauntedObject hauntedObject = highlightedObject.GetTarget();
-                EventManager.StopPossession(hauntedObject.room, hauntedObject.type);
+                if (highlightedObject)
+                {
+                    HauntedObject hauntedObject = highlightedObject.GetTarget();
+                    EventManager.StopPossession(hauntedObject.room, hauntedObject.type);
+                }
                 shootTimeGuage.value = 0;
                 shootTimeGuage.transform.parent.gameObject.SetActive(false);
                 shootTimer = 0.0f;

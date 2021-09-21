@@ -165,6 +165,7 @@ public class Ghost : MonoBehaviour
         ResetPosition();
         objects.RemoveAll(thisObject => thisObject.GetState() == ObjectState.Saved);
         ChangeState(GhostState.Inactive);
+        renderer.enabled = false;
     }
 
     private void OnPossessionComplete(Room room, ObjectType type)
@@ -178,6 +179,7 @@ public class Ghost : MonoBehaviour
         ResetPosition();
         objects.RemoveAll(thisObject => thisObject.GetState() == ObjectState.Saved);
         ChangeState(GhostState.Inactive);
+        renderer.enabled = false;
     }
 
     private void OnPossessionPause(Room room, ObjectType type)

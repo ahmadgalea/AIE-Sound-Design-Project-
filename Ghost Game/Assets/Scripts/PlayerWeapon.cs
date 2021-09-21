@@ -18,6 +18,8 @@ public class PlayerWeapon : MonoBehaviour
     private float shootTimer = 0.0f;
 
     private bool aLightIsOn = false;
+    private Transform initialTransform;
+
 
     void Start()
     {
@@ -26,6 +28,13 @@ public class PlayerWeapon : MonoBehaviour
         EventManager.OnLightOff += OnLightOff;
 
         EventManager.OnGameStateChanged += OnGameStateChanged;
+        initialTransform = transform;
+    }
+
+    private void Reset()
+    {
+        transform.position = initialTransform.position;
+        transform.rotation = initialTransform.rotation;
     }
 
     // Update is called once per frame
@@ -130,10 +139,21 @@ public class PlayerWeapon : MonoBehaviour
 
     private void OnGameStateChanged(GameState newState)
     {
-        //switch(newState)
-        //{
-        //    case GameState.Playing:
-        //        transform.parent.GetComponentInParent<>();
-        //}
+        var controller = transform.parent.GetComponentInParent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
+        switch (newState)
+        {
+            case GameState.Playing:
+                Reset();
+                controller.enabled = true;
+                break;
+            case GameState.Won:
+                controller.enabled = false;
+                break;
+            case GameState.Lost:
+                controller.enabled = false;
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -66,7 +66,9 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Playing:
                 Reset();
-                if(hudScreen != null)
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                if (hudScreen != null)
                 {
                     hudScreen.SetActive(true);
                 }
@@ -80,6 +82,9 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Won:
+
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 if (hudScreen != null)
                 {
                     hudScreen.SetActive(false);
@@ -94,6 +99,8 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Lost:
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 if (hudScreen != null)
                 {
                     hudScreen.SetActive(false);

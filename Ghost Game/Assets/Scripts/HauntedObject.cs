@@ -35,15 +35,18 @@ public class HauntedObject : MonoBehaviour
         EventManager.OnPossessionPause += OnPossessionPause;
         EventManager.OnPossessionContinue += OnPossessionContinue;
         EventManager.OnPossessionComplete += OnPossessionComplete;
+
+        EventManager.OnGameStateChanged += OnGameStateChanged;
+
         audio = GetComponent<AudioSource>();
 
- 
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void OnPossessionStart(Room posRoom, ObjectType posType)
     {
@@ -56,7 +59,7 @@ public class HauntedObject : MonoBehaviour
 
     private void OnPossessionStop(Room posRoom, ObjectType posType)
     {
-        if (room == posRoom && posType == type )
+        if (room == posRoom && posType == type)
         {
             state = ObjectState.Saved;
             audio.Stop();
@@ -97,12 +100,20 @@ public class HauntedObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Ghost" && state == ObjectState.Normal)
+        if (other.tag == "Ghost" && state == ObjectState.Normal)
         {
             if (other.GetComponent<Ghost>().GetTarget() == this)
             {
                 EventManager.StartPossession(room, type);
             }
+        }
+    }
+
+    private void OnGameStateChanged(GameState newState)
+    {
+        if (newState == GameState.Playing)
+        {
+            state = ObjectState.Normal;
         }
     }
 }

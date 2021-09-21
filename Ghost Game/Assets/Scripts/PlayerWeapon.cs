@@ -49,6 +49,7 @@ public class PlayerWeapon : MonoBehaviour
                 {
                     HauntedObject hauntedObject = highlightedObject.GetTarget();
                     EventManager.StopPossession(hauntedObject.room, hauntedObject.type);
+                    EventManager.TurnOffLight(hauntedObject.room);
                 }
                 shootTimeGuage.value = 0;
                 shootTimeGuage.transform.parent.gameObject.SetActive(false);

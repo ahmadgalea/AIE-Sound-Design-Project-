@@ -19,6 +19,7 @@ public class PlayerWeapon : MonoBehaviour
 
     private bool aLightIsOn = false;
     private Transform initialTransform;
+    private AudioSource audio = null;
 
 
     void Start()
@@ -29,6 +30,8 @@ public class PlayerWeapon : MonoBehaviour
 
         EventManager.OnGameStateChanged += OnGameStateChanged;
         initialTransform = transform;
+
+        audio = GetComponent<AudioSource>();
     }
 
     private void Reset()
@@ -109,6 +112,7 @@ public class PlayerWeapon : MonoBehaviour
             shootTimer = 0.0f;
             shootTimeGuage.transform.parent.gameObject.SetActive(true);
             isShooting = true;
+            audio.Play();
         }
 
         if (highlighedSwitch && !aLightIsOn)
@@ -128,6 +132,7 @@ public class PlayerWeapon : MonoBehaviour
                 shootTimeGuage.value = 0;
                 shootTimeGuage.transform.parent.gameObject.SetActive(false);
                 isShooting = false;
+                audio.Stop();
             }
         }
     }

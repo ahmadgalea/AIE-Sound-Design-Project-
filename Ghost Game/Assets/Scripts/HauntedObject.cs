@@ -99,7 +99,10 @@ public class HauntedObject : MonoBehaviour
     {
         if(other.tag == "Ghost" && state == ObjectState.Normal)
         {
-            EventManager.StartPossession(room,type);
+            if (other.GetComponent<Ghost>().GetTarget() == this)
+            {
+                EventManager.StartPossession(room, type);
+            }
         }
     }
 }

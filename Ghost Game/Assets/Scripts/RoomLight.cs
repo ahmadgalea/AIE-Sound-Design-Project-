@@ -18,11 +18,14 @@ public class RoomLight : MonoBehaviour
 
     public AudioSource tickTockSlow = null;
     public AudioSource tickTockFast = null;
+    public AudioSource flicker = null;
 
     private bool isOn = false;
     private float timer = 0.0f;
     private float flashTimer = 0.0f;
     private Light light = null;
+
+    private bool isFlickering = false;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +71,17 @@ public class RoomLight : MonoBehaviour
             }
             if(timer >= lightDuration)
             {
-                EventManager.TurnOffLight(room);
+                tickTockFast.Stop();
+                if(!isFlickering)
+                {
+                    flicker.Play();
+                    isFlickering = true;
+                }
+                if (isFlickering && !flicker.isPlaying)
+                {
+                    isFlickering = false;
+                    EventManager.TurnOffLight(room);
+                }
             }
         }
     }
@@ -114,6 +127,7 @@ public class RoomLight : MonoBehaviour
         {
             tickTockFast.Stop();
         }
+       
     }
 
     public bool IsOn()

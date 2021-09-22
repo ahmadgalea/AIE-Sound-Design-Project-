@@ -49,7 +49,7 @@ public class Ghost : MonoBehaviour
         renderer = transform.GetComponentInChildren<MeshRenderer>();
         renderer.enabled = false;
 
-        Reset();
+        //Reset();
     }
 
     private void Reset()

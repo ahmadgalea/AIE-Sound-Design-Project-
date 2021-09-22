@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject hudScreen = null;
     public GameObject gameWinScreen = null;
     public GameObject gameLossScreen = null;
+    public GameObject startScreen = null;
 
     private HauntedObject[] objects;
 
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
     int possessedObjects = 0;
     int savedObjects = 0;
 
-    public static GameState state = GameState.Playing;
+    public static GameState state = GameState.StartMenu;
 
 
     // Start is called before the first frame update
@@ -44,6 +45,8 @@ public class GameManager : MonoBehaviour
         EventManager.OnPossessionPause += OnPossessionPause;
         EventManager.OnPossessionContinue += OnPossessionContinue;
         EventManager.OnPossessionComplete += OnPossessionComplete;
+
+        EventManager.ChangeGameState(GameState.StartMenu);
     }
 
     // Update is called once per frame
@@ -62,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     private void OnGameStateChanged(GameState newState)
     {
+        state = newState;
         switch(newState)
         {
             case GameState.Playing:
@@ -80,6 +84,10 @@ public class GameManager : MonoBehaviour
                 {
                     gameWinScreen.SetActive(false);
                 }
+                if (startScreen != null)
+                {
+                    startScreen.SetActive(false);
+                }
                 break;
             case GameState.Won:
 
@@ -97,6 +105,10 @@ public class GameManager : MonoBehaviour
                 {
                     gameWinScreen.SetActive(true);
                 }
+                if (startScreen != null)
+                {
+                    startScreen.SetActive(false);
+                }
                 break;
             case GameState.Lost:
                 Cursor.visible = true;
@@ -112,6 +124,31 @@ public class GameManager : MonoBehaviour
                 if (gameWinScreen != null)
                 {
                     gameWinScreen.SetActive(false);
+                }
+                if (startScreen != null)
+                {
+                    startScreen.SetActive(false);
+                }
+                break;
+            case GameState.StartMenu:
+
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                if (hudScreen != null)
+                {
+                    hudScreen.SetActive(false);
+                }
+                if (gameLossScreen != null)
+                {
+                    gameLossScreen.SetActive(false);
+                }
+                if (gameWinScreen != null)
+                {
+                    gameWinScreen.SetActive(false);
+                }
+                if (startScreen != null)
+                {
+                    startScreen.SetActive(true);
                 }
                 break;
             case GameState.Quit:

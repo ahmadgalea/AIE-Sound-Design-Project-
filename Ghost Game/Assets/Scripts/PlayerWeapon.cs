@@ -154,6 +154,9 @@ public class PlayerWeapon : MonoBehaviour
             case GameState.Won:
                 controller.enabled = false;
                 break;
+            case GameState.StartMenu:
+                controller.enabled = false;
+                break;
             case GameState.Lost:
                 controller.enabled = false;
                 break;

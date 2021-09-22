@@ -10,11 +10,15 @@ public class Switch : MonoBehaviour
 
     public Room room;
 
+    private AudioSource audio = null;
+
 
     void Start()
     {
         EventManager.OnLightOn += OnTurnOn;
         EventManager.OnLightOff += OnTurnOff;
+
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -26,11 +30,13 @@ public class Switch : MonoBehaviour
     public void TurnOn()
     {
         GetComponent<Renderer>().material = onMaterial;
+        audio.Play();
     }
 
     public void TurnOff()
     {
         GetComponent<Renderer>().material = offMaterial;
+        audio.Play();
         //EventManager.TurnOnLight(room);
     }
 

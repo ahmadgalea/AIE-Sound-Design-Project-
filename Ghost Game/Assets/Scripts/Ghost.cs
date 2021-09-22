@@ -33,6 +33,7 @@ public class Ghost : MonoBehaviour
     private bool possessionPaused = false;
 
     private MeshRenderer renderer = null;
+    private bool gamePaused = false;
 
     void Start()
     {
@@ -56,11 +57,17 @@ public class Ghost : MonoBehaviour
     {
         objects.AddRange(FindObjectsOfType<HauntedObject>());
         ResetPosition();
+        gamePaused = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(gamePaused)
+        {
+            return;
+        }
+
         if (player != null)
         {
             transform.LookAt(player.transform.position);
@@ -238,6 +245,10 @@ public class Ghost : MonoBehaviour
         if(newState == GameState.Playing)
         {
             Reset();
+        }
+        else
+        {
+            gamePaused = true;
         }
     }
 }

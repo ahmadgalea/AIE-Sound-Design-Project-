@@ -24,11 +24,15 @@ public class GameManager : MonoBehaviour
     public GameObject gameLossScreen = null;
     public GameObject startScreen = null;
 
+    public AudioSource winAudio = null;
+    public AudioSource lossAudio = null;
+
     private HauntedObject[] objects;
 
     int normalObjects = 0;
     int possessedObjects = 0;
     int savedObjects = 0;
+    int totalObjects = 0;
 
     public static GameState state = GameState.StartMenu;
 
@@ -57,7 +61,8 @@ public class GameManager : MonoBehaviour
     private void Reset()
     {
         objects = FindObjectsOfType<HauntedObject>();
-        normalObjects = objects.Length;
+        totalObjects = objects.Length;
+        normalObjects = totalObjects;
         possessedObjects = 0;
         savedObjects = 0;
         UpdateUI();
@@ -174,12 +179,13 @@ public class GameManager : MonoBehaviour
         normalObjects--;
         savedObjects++;
         UpdateUI();
-        if(normalObjects == 0)
+        if(savedObjects > (totalObjects/2))
         {
-            if(savedObjects > possessedObjects)
+            if(winAudio != null)
             {
-                EventManager.ChangeGameState(GameState.Won);
+                winAudio.Play();
             }
+            EventManager.ChangeGameState(GameState.Won);
         }
     }
 
@@ -188,12 +194,13 @@ public class GameManager : MonoBehaviour
         normalObjects--;
         possessedObjects++;
         UpdateUI();
-        if (normalObjects == 0)
+        if (possessedObjects > (totalObjects/2))
         {
-            if (savedObjects <= possessedObjects)
+            if(lossAudio!=null)
             {
-                EventManager.ChangeGameState(GameState.Lost);
+                lossAudio.Play();
             }
+            EventManager.ChangeGameState(GameState.Lost);
         }
     }
 

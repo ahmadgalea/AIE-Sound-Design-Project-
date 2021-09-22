@@ -22,13 +22,15 @@ public class HauntedObject : MonoBehaviour
     public ObjectType type;
     public Room room;
 
-    public AudioSource possessionAudio = null;
+    public List<AudioSource> possessionAudioOptions = new List<AudioSource>();
     public AudioSource possessionConcludedAudio = null;
     public AudioSource possessionCancelledAudio = null;
 
     private ObjectState state = ObjectState.Normal;
 
     private bool possessionPaused = false;
+
+    private AudioSource possessionAudio = null;
 
     void Start()
     {
@@ -53,6 +55,8 @@ public class HauntedObject : MonoBehaviour
         if (room == posRoom && posType == type)
         {
             state = ObjectState.BeingPossessed;
+            int audioIndex = Random.Range(0, possessionAudioOptions.Count);
+            possessionAudio = possessionAudioOptions[audioIndex];
             possessionAudio.Play();
         }
     }
@@ -62,7 +66,10 @@ public class HauntedObject : MonoBehaviour
         if (room == posRoom && posType == type)
         {
             state = ObjectState.Saved;
-            possessionAudio.Stop();
+            if (possessionAudio)
+            {
+                possessionAudio.Stop();
+            }
             possessionCancelledAudio.Play();
         }
     }
@@ -71,7 +78,10 @@ public class HauntedObject : MonoBehaviour
     {
         if (room == posRoom)
         {
-            possessionAudio.Stop();
+            if (possessionAudio)
+            {
+                possessionAudio.Stop();
+            }
             possessionPaused = true;
         }
     }
@@ -80,7 +90,10 @@ public class HauntedObject : MonoBehaviour
     {
         if (state == ObjectState.BeingPossessed && room == posRoom)
         {
-            possessionAudio.Play();
+            if (possessionAudio)
+            {
+                possessionAudio.Play();
+            }
             possessionPaused = false;
         }
     }
@@ -89,7 +102,10 @@ public class HauntedObject : MonoBehaviour
     {
         if (room == posRoom && posType == type)
         {
-            possessionAudio.Stop();
+            if (possessionAudio)
+            {
+                possessionAudio.Stop();
+            }
             state = ObjectState.Possessed;
             possessionConcludedAudio.Play();
         }

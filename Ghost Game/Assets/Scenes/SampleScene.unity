@@ -272,7 +272,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 5bb3c064435466049b7d536361a3afb1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ae7424c134e8444d9a41850ff8d463a, type: 2}
     - target: {fileID: 919132149155446097, guid: 5bb3c064435466049b7d536361a3afb1, type: 3}
       propertyPath: m_Name
       value: Tumbler (1)
@@ -954,7 +954,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 2266f4b3709e310489397ec2e9538824, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 9fd11c71d53d5fd408694072c9baab05, type: 2}
     - target: {fileID: 919132149155446097, guid: 2266f4b3709e310489397ec2e9538824, type: 3}
       propertyPath: m_Name
       value: HouseMesh
@@ -1111,7 +1111,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: c65f6af8342f0d245b89e3c92f54c094, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 72a8b599494562a4eab1a24492dc02c0, type: 2}
     - target: {fileID: 919132149155446097, guid: c65f6af8342f0d245b89e3c92f54c094, type: 3}
       propertyPath: m_Name
       value: Bottle
@@ -1344,7 +1344,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 5bb3c064435466049b7d536361a3afb1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ae7424c134e8444d9a41850ff8d463a, type: 2}
     - target: {fileID: 919132149155446097, guid: 5bb3c064435466049b7d536361a3afb1, type: 3}
       propertyPath: m_Name
       value: Tumbler
@@ -2384,7 +2384,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 003e2dd01f1e6aa42a0e75b06d19e968, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 9c8bc64cdca49604cb9472f0a4247d39, type: 2}
     - target: {fileID: 919132149155446097, guid: 003e2dd01f1e6aa42a0e75b06d19e968, type: 3}
       propertyPath: m_Name
       value: Bath
@@ -2804,7 +2804,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 8046912d1260e214d989e601e60b608e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: a560100e7b45b8548976dec89010b49d, type: 2}
     - target: {fileID: 919132149155446097, guid: 8046912d1260e214d989e601e60b608e, type: 3}
       propertyPath: m_Name
       value: Table
@@ -2984,7 +2984,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 4ea85df061ee3924ebb3eea3c55420ce, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 3cb4567775dfd524689d9629989fef84, type: 2}
     - target: {fileID: 919132149155446097, guid: 4ea85df061ee3924ebb3eea3c55420ce, type: 3}
       propertyPath: m_Name
       value: Sink
@@ -3261,7 +3261,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: f97f4010afee90740a37f3041118708f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ae7424c134e8444d9a41850ff8d463a, type: 2}
     - target: {fileID: 919132149155446097, guid: f97f4010afee90740a37f3041118708f, type: 3}
       propertyPath: m_Name
       value: Wine Glass (2)
@@ -3640,7 +3640,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 0f7516b2157a41245a741e755e33561f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: a560100e7b45b8548976dec89010b49d, type: 2}
     - target: {fileID: 919132149155446097, guid: 0f7516b2157a41245a741e755e33561f, type: 3}
       propertyPath: m_Name
       value: Kitchen table
@@ -3905,7 +3905,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 44d3705d1dd09ad459d35eba6fb4bb32, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 111e08b4165a1c84e88ed2049907d674, type: 2}
     - target: {fileID: 919132149155446097, guid: 44d3705d1dd09ad459d35eba6fb4bb32, type: 3}
       propertyPath: m_Name
       value: Door (1)
@@ -4080,7 +4080,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: f97f4010afee90740a37f3041118708f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ae7424c134e8444d9a41850ff8d463a, type: 2}
     - target: {fileID: 919132149155446097, guid: f97f4010afee90740a37f3041118708f, type: 3}
       propertyPath: m_Name
       value: Wine Glass (1)
@@ -4616,7 +4616,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: c65f6af8342f0d245b89e3c92f54c094, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 72a8b599494562a4eab1a24492dc02c0, type: 2}
     - target: {fileID: 919132149155446097, guid: c65f6af8342f0d245b89e3c92f54c094, type: 3}
       propertyPath: m_Name
       value: Bottle (1)
@@ -5483,7 +5483,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: f97f4010afee90740a37f3041118708f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ae7424c134e8444d9a41850ff8d463a, type: 2}
     - target: {fileID: 919132149155446097, guid: f97f4010afee90740a37f3041118708f, type: 3}
       propertyPath: m_Name
       value: Wine Glass
@@ -5621,7 +5621,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 44d3705d1dd09ad459d35eba6fb4bb32, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55e36e09ac1d78642ac862fc0bbbe7a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 111e08b4165a1c84e88ed2049907d674, type: 2}
     - target: {fileID: 919132149155446097, guid: 44d3705d1dd09ad459d35eba6fb4bb32, type: 3}
       propertyPath: m_Name
       value: Door (2)

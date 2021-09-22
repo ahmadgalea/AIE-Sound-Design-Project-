@@ -21,6 +21,9 @@ public class Ghost : MonoBehaviour
 
     public Slider hauntingTimer = null;
 
+    public AudioSource spawnAudio = null;
+    public AudioSource suppriseAudio = null;
+
     private List<HauntedObject> objects = new List<HauntedObject>();
     private HauntedObject targetObject = null;
 
@@ -29,7 +32,6 @@ public class Ghost : MonoBehaviour
     private float timer = 0.0f;
     private bool possessionPaused = false;
 
-    private AudioSource audio = null;
     private MeshRenderer renderer = null;
 
     void Start()
@@ -44,7 +46,6 @@ public class Ghost : MonoBehaviour
 
         EventManager.OnGameStateChanged += OnGameStateChanged;
 
-        audio = GetComponent<AudioSource>();
         renderer = transform.GetComponentInChildren<MeshRenderer>();
         renderer.enabled = false;
 
@@ -83,7 +84,7 @@ public class Ghost : MonoBehaviour
                     if (targetObject == null)
                     {
                         TargetObject();
-                        audio.Play();
+                        spawnAudio.Play();
                     }
             
                     UpdatePosition();
@@ -159,7 +160,7 @@ public class Ghost : MonoBehaviour
             hauntingTimer.transform.parent.gameObject.SetActive(true);
         }
         possessionPaused = false;
-        audio.Stop();
+        spawnAudio.Stop();
         ChangeState(GhostState.Possessing);
     }
 
@@ -219,6 +220,7 @@ public class Ghost : MonoBehaviour
         {
             EventManager.PausePossession(targetObject.room, targetObject.type);
             renderer.enabled = true;
+            suppriseAudio.Play();
         }
     }
 

@@ -56,13 +56,14 @@ public class RoomLight : MonoBehaviour
             timer += Time.deltaTime;
             if(timer >= (lightDuration-flashingDuration))
             {
-                if(tickTockSlow.isPlaying)
+                tickTockSlow.loop = false;
+                if(!tickTockSlow.isPlaying)
                 {
                     if (tickTockSlow)
                     {
-                        tickTockSlow.Stop();
+                        //tickTockSlow.Stop();
                     }
-                    if (tickTockFast)
+                    if (!tickTockFast.isPlaying)
                     {
                         tickTockFast.Play();
                     }
@@ -108,6 +109,7 @@ public class RoomLight : MonoBehaviour
         }
         if(tickTockSlow)
         {
+            tickTockSlow.loop = true;
             tickTockSlow.Play();
         }
     }
